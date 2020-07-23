@@ -1,7 +1,10 @@
 import 'package:calculationdairy/base/animationutils/FadeIn.dart';
+import 'package:calculationdairy/base/dependancyInjection/locator.dart';
+import 'package:calculationdairy/base/hiveutils/hiveobjects/user_model.dart';
 import 'package:calculationdairy/utils/const/color_const.dart';
 import 'package:calculationdairy/utils/const/image_const.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -104,15 +107,27 @@ class _LoginScreenState extends State<LoginScreen> {
                         )),
                         SizedBox(height: 40,),
                         SizedBox(height: 40,),
-                        FadeAnimation(delay:2.2, child:Container(
-                          height: 50,
-                          margin: EdgeInsets.symmetric(horizontal: 50),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50),
-                              color: primaryColors
-                          ),
-                          child: Center(
-                            child: Text("Login", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                        FadeAnimation(delay:2.2, child:
+                        InkWell(
+                          onTap: () async {
+                            var person=UserModel("admin1","123456");
+                           var box= await locator.get("Box");
+                            box.put('name', 'David');
+
+                            var name = box.get('app_data');
+
+                            print('Name: $name');
+                          },
+                          child: Container(
+                            height: 50,
+                            margin: EdgeInsets.symmetric(horizontal: 50),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                color: primaryColors
+                            ),
+                            child: Center(
+                              child: Text("Login", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                            ),
                           ),
                         )),
                       ],
