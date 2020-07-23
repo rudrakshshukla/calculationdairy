@@ -1,5 +1,8 @@
 import 'dart:async';
 
+import 'package:calculationdairy/base/dependancyInjection/locator.dart';
+import 'package:calculationdairy/base/navigationutils/navaigation_route.dart';
+import 'package:calculationdairy/base/navigationutils/navigation_constant.dart';
 import 'package:calculationdairy/utils/const/color_const.dart';
 import 'package:calculationdairy/utils/const/image_const.dart';
 import 'package:flutter/material.dart';
@@ -9,10 +12,8 @@ class SplashScreen extends StatefulWidget {
 }
 
 class FadeIn extends State<SplashScreen> with TickerProviderStateMixin{
-  Timer _timer;
   double scanle=1;
-  Widget value=
-  Column(
+  Widget value= Column(
     mainAxisAlignment: MainAxisAlignment.center,
     children: <Widget>[
       Image.asset(splashImage,scale: 2,),
@@ -20,12 +21,26 @@ class FadeIn extends State<SplashScreen> with TickerProviderStateMixin{
     ],
   );
 
+
   var valueAfterAnim=Image.asset(splashImage,scale: 5,);
 
 
 
+  _startTime(BuildContext context) async {
+    var _duration = Duration(seconds: 3);
+    return Timer(_duration, () async {
+
+        _gotoNextScreen();
+
+    });
+  }
+
   AnimationController _controller;
   Animation<double> _animation;
+
+  _gotoNextScreen(){
+    locator<NavigationRoutes>().pushReplacement(context, routeLogin);
+  }
 
 
   @override
@@ -37,6 +52,10 @@ class FadeIn extends State<SplashScreen> with TickerProviderStateMixin{
     _animation = CurvedAnimation(parent: _controller, curve: Curves.bounceOut);
 
     _controller.forward();
+
+    Future.delayed(Duration(seconds: 0), () async {
+      _startTime(context);
+    });
   }
 
   @override
