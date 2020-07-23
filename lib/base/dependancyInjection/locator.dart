@@ -15,7 +15,7 @@ Future<void> setupLocator() async {
 
   locator.registerLazySingleton(()  => PreferenceUtils.getInstance());
 
-  locator.registerLazySingleton(() async => Hive.openBox('app_data'),instanceName: "Box");
+  locator.registerLazySingleton(() async => Hive.openBox('Box'),instanceName: "Box");
 
 
 

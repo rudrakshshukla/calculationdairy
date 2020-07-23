@@ -111,12 +111,15 @@ class _LoginScreenState extends State<LoginScreen> {
                         InkWell(
                           onTap: () async {
                             var person=UserModel("admin1","123456");
-                           var box= await locator.get("Box");
-                            box.put('name', 'David');
+                            var box= await locator.get("Box");
+                            var a = Hive.box('Box');
 
-                            var name = box.get('app_data');
+                            a.put('name', 'David');
+
+                            var name = a.get('name');
 
                             print('Name: $name');
+
                           },
                           child: Container(
                             height: 50,
