@@ -1,6 +1,9 @@
 import 'dart:async';
 
 import 'package:calculationdairy/base/dependancyInjection/locator.dart';
+import 'package:calculationdairy/base/hiveutils/hive_maneger.dart';
+import 'package:calculationdairy/base/hiveutils/hive_constanst.dart';
+
 import 'package:calculationdairy/base/navigationutils/navaigation_route.dart';
 import 'package:calculationdairy/base/navigationutils/navigation_constant.dart';
 import 'package:calculationdairy/utils/const/color_const.dart';
@@ -28,6 +31,14 @@ class FadeIn extends State<SplashScreen> with TickerProviderStateMixin{
     var _duration = Duration(seconds: 3);
     return Timer(_duration, () async {
 
+      var isFirstTime=locator<HiveManeger>().getBoolValue(isUserRegularUser);
+      if(!isFirstTime)
+      {
+        locator<HiveManeger>().putValue("Admin1", "Admin@1234");
+        locator<HiveManeger>().putValue("Admin2", "Admin@1234");
+        locator<HiveManeger>().putValue(isUserRegularUser,true);
+      }
+
         _gotoNextScreen();
 
     });
@@ -50,6 +61,7 @@ class FadeIn extends State<SplashScreen> with TickerProviderStateMixin{
     _animation = CurvedAnimation(parent: _controller, curve: Curves.bounceOut);
 
     _controller.forward();
+
 
     Future.delayed(Duration(seconds: 0), () async {
       _startTime(context);
