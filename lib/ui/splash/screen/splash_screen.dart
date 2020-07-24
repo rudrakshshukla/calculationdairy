@@ -24,8 +24,6 @@ class FadeIn extends State<SplashScreen> with TickerProviderStateMixin{
 
   var valueAfterAnim=Image.asset(splashImage,scale: 5,);
 
-
-
   _startTime(BuildContext context) async {
     var _duration = Duration(seconds: 3);
     return Timer(_duration, () async {

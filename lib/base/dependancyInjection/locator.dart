@@ -1,5 +1,6 @@
 
 
+import 'package:calculationdairy/base/hiveutils/hive_maneger.dart';
 import 'package:calculationdairy/base/hiveutils/hiveobjects/user_model.dart';
 import 'package:calculationdairy/base/navigationutils/navaigation_route.dart';
 import 'package:calculationdairy/base/sharedprefrence/shared_prefrence_utils.dart';
@@ -13,11 +14,13 @@ Future<void> setupLocator() async {
   final dir = await getApplicationDocumentsDirectory();
   Hive..init(dir.path);
 
-  locator.registerLazySingleton(()  => PreferenceUtils.getInstance());
-
-  locator.registerLazySingleton(() async => Hive.openBox('Box'),instanceName: "Box");
 
 
+//  locator.registerLazySingleton(() async => HiveManeger().initHive(),instanceName: "Box");
+
+//  locator.registerLazySingleton(()  => PreferenceUtils.getInstance());
+
+  locator.registerSingleton<HiveManeger>(HiveManeger());
 
   locator.registerSingleton<NavigationRoutes>(NavigationRoutes());
 

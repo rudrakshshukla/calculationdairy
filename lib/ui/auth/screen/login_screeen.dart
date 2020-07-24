@@ -1,5 +1,7 @@
 import 'package:calculationdairy/base/animationutils/FadeIn.dart';
 import 'package:calculationdairy/base/dependancyInjection/locator.dart';
+import 'package:calculationdairy/base/hiveutils/hive_constanst.dart';
+import 'package:calculationdairy/base/hiveutils/hive_maneger.dart';
 import 'package:calculationdairy/base/hiveutils/hiveobjects/user_model.dart';
 import 'package:calculationdairy/utils/const/color_const.dart';
 import 'package:calculationdairy/utils/const/image_const.dart';
@@ -110,15 +112,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         FadeAnimation(delay:2.2, child:
                         InkWell(
                           onTap: () async {
-                            var person=UserModel("admin1","123456");
-                            var box= await locator.get("Box");
-                            var a = Hive.box('Box');
 
-                            a.put('name', 'David');
 
-                            var name = a.get('name');
-
-                            print('Name: $name');
 
                           },
                           child: Container(
